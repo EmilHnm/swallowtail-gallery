@@ -1,10 +1,34 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
+import { CreateComponent } from './components/main-page/create/create.component';
+import { DiscoverComponent } from './components/main-page/discover/discover.component';
+import { EditComponent } from './components/main-page/edit/edit.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { PostComponent } from './components/main-page/post/post.component';
+import { ProfileComponent } from './components/main-page/profile/profile.component';
+import { SearchComponent } from './components/main-page/search/search.component';
+import { SigninComponent } from './components/signin/signin.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: MainPageComponent,
+    children: [
+      { path: '', component: DiscoverComponent },
+      { path: 'search', component: SearchComponent },
+      { path: 'create', component: CreateComponent },
+      { path: 'profile/:id', component: ProfileComponent },
+      { path: 'post', component: PostComponent },
+      { path: 'edit', component: EditComponent },
+    ],
+  },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SigninComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

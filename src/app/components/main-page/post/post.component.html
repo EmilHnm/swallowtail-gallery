@@ -1,0 +1,52 @@
+<div class="block md:flex md:min-h-[80vh] relative w-4/5 mx-auto mt-10">
+  <div class="relative w-full md:w-2/6 h-full px-5">
+    <div class="flex items-center justify-between">
+      <mat-icon
+        class="cursor-pointer"
+        [ngClass]="{ 'text-primary': hearted }"
+        (click)="heart()"
+        >favorite</mat-icon
+      >
+      <h1
+        class="mb-1 w-4/5 text-5xl text-center overflow-hidden font-rosellinda text-primary"
+        matTooltip="{{ post.title }}"
+      >
+        {{ post.title }}
+      </h1>
+
+      <a
+        *ngIf="post.uid == loggingInUser.uid"
+        matTooltip="Edit this post"
+        [routerLink]="['../edit']"
+        [queryParams]="{ id: post.id }"
+      >
+        <mat-icon class="cursor-pointer text-gray-600 text-center"
+          >edit_note</mat-icon
+        >
+      </a>
+    </div>
+
+    <p class="text-lg text-gray-700 py-4 font-holyday">
+      {{ post.description }}
+    </p>
+  </div>
+  <div
+    class="w-full md:w-4/6 max-h-[calc(100vh-150px)]"
+    (click)="openPictureDialog()"
+  >
+    <img
+      class="w-full h-full object-scale-down"
+      [src]="'http://localhost/gallery-backend/public/' + this.post.imagePath"
+      alt=""
+    />
+  </div>
+  <div class="static md:absolute py-3 md:py-0 md:bottom-3">
+    <span class="text-gray-600 font-josefin font-bold">
+      {{ post.create_date }}
+    </span>
+    -
+    <span class="text-gray-600 font-holyday font-bold">
+      {{ creator }}
+    </span>
+  </div>
+</div>

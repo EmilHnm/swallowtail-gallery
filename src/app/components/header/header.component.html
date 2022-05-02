@@ -1,0 +1,48 @@
+<nav
+  class="fixed w-full h-16 flex justify-between px-4 py-2 text-primary bg-[#e9e8e8] z-50"
+>
+  <a routerLink="/" class="block h-full cursor-pointer">
+    <span class="text-5xl cursor-pointer font-rosellinda">Swallowtail</span>
+    <span class="font-josefin text-sm cursor-pointer font-bold"
+      >Share your moment</span
+    >
+  </a>
+  <div class="hidden md:flex w-3/5 justify-around items-center">
+    <a
+      routerLink="/search"
+      [routerLinkActive]="['font-bold']"
+      class="group block h-max relative"
+    >
+      <span class="text-lg">Search</span>
+      <span
+        class="absolute w-0 animate-bounce group-hover:w-full h-[2px] left-0 bottom-0 bg-primary"
+      ></span>
+    </a>
+    <a
+      routerLink="/create"
+      [routerLinkActive]="['font-bold']"
+      class="group block h-max relative"
+    >
+      <span class="text-lg">Create</span>
+      <span
+        class="absolute w-0 animate-bounce group-hover:w-full h-[2px] left-0 bottom-0 bg-primary"
+      ></span>
+    </a>
+    <a
+      [routerLink]="['/profile', this.userService.getUserLogingIn().uid]"
+      [routerLinkActive]="['font-bold']"
+      class="group block h-max relative"
+    >
+      <span class="text-lg">Your Moment</span>
+      <span
+        class="absolute w-0 animate-bounce group-hover:w-full h-[2px] left-0 bottom-0 bg-primary"
+      ></span>
+    </a>
+    <a (click)="logOut()" class="group block h-max relative">
+      <span class="text-lg">Log Out</span>
+      <span
+        class="absolute w-0 animate-bounce group-hover:w-full h-[2px] left-0 bottom-0 bg-primary"
+      ></span>
+    </a>
+  </div>
+</nav>

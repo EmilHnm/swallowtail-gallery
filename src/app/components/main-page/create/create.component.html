@@ -1,0 +1,105 @@
+<div class="w-4/5 mx-auto mt-5 px-5 py-9 bg-white">
+  <div class="font-josefin text-4xl font-bold">Share your moment</div>
+  <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" class="w-full">
+    <div class="block md:flex w-full mb-3">
+      <div class="w-full md:w-1/2 h-full">
+        <label class="text-3xl text-primary font-rosellinda">Title*</label>
+        <input
+          type="text"
+          class="block pl-3 py-2 my-1 w-full rounded-3xl border border-solid border-gray-500 focus:outline-purple-500 bg-ytPrimary text-xl"
+          placeholder="Enter your title"
+          formControlName="title"
+          style="
+            -webkit-user-modify: read-write-plaintext-only;
+            font-family: Holiday;
+          "
+        />
+        <label class="text-3xl text-primary font-rosellinda">Description</label>
+        <!-- <div
+          class="block pl-3 py-4 my-1 w-full h-80 rounded-3xl border border-solid border-gray-500 focus:outline-purple-500 bg-ytPrimary overflow-scroll text-base leading-7 text-gray-600 scrollbar"
+          contenteditable="true"
+          [textContent]="model"
+          (input)="onDesscriptionChange($event)"
+          formControlName="description"
+          style="
+            -webkit-user-modify: read-write-plaintext-only;
+            font-family: Holiday;
+          "
+        >
+          Enter the discription
+        </div> -->
+        <app-div-description
+          formControlName="description"
+        ></app-div-description>
+        <label class="block text-3xl text-primary font-rosellinda"
+          >Visibility</label
+        >
+        <div class="flex justify-around mb-1">
+          <div class="form-check">
+            <input
+              class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-primary checked:border-white focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+              type="radio"
+              formControlName="visibility"
+              value="public"
+            />
+            <label class="form-check-label inline-block text-gray-800">
+              Public
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-primary checked:border-white focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+              type="radio"
+              value="private"
+              formControlName="visibility"
+            />
+            <label class="form-check-label inline-block text-gray-800">
+              Private
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="relative min-h-[50vh] w-full md:w-1/2 ml-3 overflow-hidden border rounded-2xl"
+      >
+        <input
+          type="file"
+          formControlName="image"
+          id=""
+          class="absolute opacity-0 w-full h-full top-0 left-0 z-30"
+          (change)="onFileChange($event)"
+          accept="image/png, image/gif, image/jpeg"
+        />
+        <div class="relative w-full h-full">
+          <span
+            *ngIf="!url"
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-2/3 md:-translate-y-1/2 block text-center font-josefin font-bold text-xl text-primary"
+          >
+            Drag your photos here<br />
+            or<br />
+            click here to upload
+          </span>
+          <img
+            *ngIf="url"
+            [src]="url"
+            class="absolute top-0 left-0 block h-full w-full object-scale-down"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="flex">
+      <button
+        class="w-full rounded-2xl py-2 bg-purple-500 text-white text-xl text-center font-josefin font-bold"
+        type="submit"
+      >
+        Upload
+      </button>
+      <button
+        class="w-full rounded-2xl py-2 bg-purple-500 text-white text-xl text-center font-josefin font-bold ml-1"
+        (click)="onReset()"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>

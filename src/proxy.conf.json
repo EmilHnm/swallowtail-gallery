@@ -1,0 +1,7 @@
+﻿{
+  "/api/gallery-backend/*": {
+    "target": "http://localhost/gallery-backend",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
