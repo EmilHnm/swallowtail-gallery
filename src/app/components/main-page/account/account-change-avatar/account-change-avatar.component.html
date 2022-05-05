@@ -1,0 +1,17 @@
+<div class="w-full h-full flex items-center justify-center">
+  <button
+    class="w-64 h-64 rounded-full overflow-hidden border border-primary"
+    [matTooltip]="'Change Profile Picture'"
+    (click)="openDialog()"
+  >
+    <img
+      [src]="
+        UserProfile.avatarImg
+          ? 'http://localhost/gallery-backend/public/' + UserProfile.avatarImg
+          : 'https://i.pinimg.com/originals/15/11/da/1511daf6288631f1f16c0e32a6a994c0.png'
+      "
+      alt="avatar"
+      class="w-full h-full object-contain object-center"
+    />
+  </button>
+</div>

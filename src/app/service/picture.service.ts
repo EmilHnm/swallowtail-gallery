@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
@@ -89,6 +89,22 @@ export class PictureService {
     };
 
     return this._http.post(this._basedUrl + 'editPost', formData, {
+      responseType: 'text',
+    });
+  }
+  searchPost(search: string) {
+    let headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers':
+        'Origin, X-Requested-With, Content-Type, Accept',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Credentials': 'true',
+    };
+    let body = {
+      search: search,
+    };
+    return this._http.post(this._basedUrl + 'searchPost', body, {
       responseType: 'text',
     });
   }

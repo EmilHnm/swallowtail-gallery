@@ -8,6 +8,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatStepperModule } from '@angular/material/stepper';
+
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +34,13 @@ import { PictureDialogComponent } from './components/dialog/picture-dialog/pictu
 import { PostPictureComponent } from './components/main-page/post/post-picture/post-picture.component';
 import { ClickOutSideHandleDirective } from './directives/click-out-side-handle.directive';
 import { EditComponent } from './components/main-page/edit/edit.component';
+import { UserListComponent } from './components/main-page/user-list/user-list.component';
+import { UserListItemComponent } from './components/main-page/user-list/user-list-item/user-list-item.component';
+import { AccountComponent } from './components/main-page/account/account.component';
+import { AccountEditComponent } from './components/main-page/account/account-edit/account-edit.component';
+import { AccountChangePasswordComponent } from './components/main-page/account/account-change-password/account-change-password.component';
+import { AccountChangeAvatarComponent } from './components/main-page/account/account-change-avatar/account-change-avatar.component';
+import { UploadProfileComponent } from './components/dialog/upload-profile/upload-profile.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +62,13 @@ import { EditComponent } from './components/main-page/edit/edit.component';
     PostPictureComponent,
     ClickOutSideHandleDirective,
     EditComponent,
+    UserListComponent,
+    UserListItemComponent,
+    AccountComponent,
+    AccountEditComponent,
+    AccountChangePasswordComponent,
+    AccountChangeAvatarComponent,
+    UploadProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +83,9 @@ import { EditComponent } from './components/main-page/edit/edit.component';
     MatTooltipModule,
     MatTabsModule,
     MatMenuModule,
+    MatProgressBarModule,
+    MatStepperModule,
+    ImageCropperModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,8 @@
+<mat-grid-list cols="1" #grid rowHeight="3:4">
+  <mat-grid-tile *ngFor="let user of users">
+    <app-user-list-item
+      [user]="user"
+      class="w-full h-full p-1"
+    ></app-user-list-item>
+  </mat-grid-tile>
+</mat-grid-list>

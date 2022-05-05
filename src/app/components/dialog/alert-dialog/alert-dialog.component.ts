@@ -17,7 +17,6 @@ export class AlertDialogComponent {
     @Inject(MAT_DIALOG_DATA)
     public data: { title: string; content: string }
   ) {
-    console.log(data);
     this.alertTitle = data.title;
     this.alertString = data.content;
   }

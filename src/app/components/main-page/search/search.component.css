@@ -1,0 +1,15 @@
+:host ::ng-deep .mat-ink-bar {
+  border-bottom: 2px;
+  border-style: solid;
+  border-color: #925da3;
+}
+
+:host ::ng-deep .mat-tab-header {
+  border-bottom: 0px;
+}
+
+:host ::ng-deep .mat-tab-label-content {
+  font-family: "Josefin Sans";
+  font-weight: 900;
+  font-size: 18px;
+}

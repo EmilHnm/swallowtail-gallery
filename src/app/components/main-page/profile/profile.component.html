@@ -1,29 +1,35 @@
 <div class="w-full">
-  <div class="flex w-4/5 mx-auto py-3 border-b border-purple-300">
+  <div class="block md:flex w-4/5 mx-auto py-3 border-b border-purple-300">
     <button
-      class="block rounded-full h-36 w-36 p-[1px] overflow-hidden flex-shrink-0 border-2 border-primary"
+      class="block mx-auto rounded-full h-36 w-36 p-[1px] overflow-hidden flex-shrink-0 border-2 border-primary mb-3"
     >
       <img
         [src]="
           UserProfile.avatarImg
-            ? UserProfile.avatarImg
+            ? 'http://localhost/gallery-backend/public/' + UserProfile.avatarImg
             : 'https://i.pinimg.com/originals/15/11/da/1511daf6288631f1f16c0e32a6a994c0.png'
         "
         alt=""
         class="h-full w-full rounded-full border border-primary"
       />
     </button>
-    <div class="ml-4 w-full">
-      <div class="flex items-center justify-between mb-3">
-        <h2 class="font-josefin text-2xl font-extrabold">
+    <div class="md:ml-4 w-full">
+      <div class="block md:flex items-center justify-between mb-3">
+        <h2
+          class="font-josefin text-2xl font-extrabold mx-auto md:mx-0 text-center"
+        >
           {{ this.UserProfile.username }}
         </h2>
-        <div class="h-full flex items-center" *ngIf="isProfileOwner">
-          <button
-            class="border border-primary rounded-md px-4 py-1 leading-7 font-josefin text-primary font-extrabold"
+        <div
+          class="h-full w-full md:w-max flex items-center mx-auto md:mx-0"
+          *ngIf="isProfileOwner"
+        >
+          <a
+            class="border border-primary w-full rounded-md px-4 py-1 leading-7 font-josefin text-primary font-extrabold text-center"
+            [routerLink]="['/account/edit']"
           >
             Edit Profile
-          </button>
+          </a>
           <button
             mat-icon-button
             [matMenuTriggerFor]="menu"
@@ -32,14 +38,16 @@
             <mat-icon class="material-icons-outlined">settings</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button
+            <a
+              [routerLink]="['/account/password']"
               mat-menu-item
               class="font-josefin text-base font-extrabold hover:text-primary"
             >
               <mat-icon class="material-icons-outlined">lock</mat-icon>
               <span>Change password</span>
-            </button>
-            <button
+            </a>
+            <a
+              [routerLink]="['/account/avatar']"
               mat-menu-item
               class="font-josefin text-base font-extrabold hover:text-primary"
             >
@@ -47,7 +55,7 @@
                 >account_circle</mat-icon
               >
               <span>Change avatar</span>
-            </button>
+            </a>
             <button
               mat-menu-item
               class="font-josefin text-base font-extrabold hover:text-primary"

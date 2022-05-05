@@ -1,0 +1,67 @@
+<div class="absolute hidden top-0 left-0 w-full h-max z-[1000]" #progressbar>
+  <mat-progress-bar
+    class=""
+    [mode]="mode"
+    [value]="value"
+    [bufferValue]="bufferValue"
+  >
+  </mat-progress-bar>
+</div>
+<div class="w-full px-3">
+  <div class="flex w-max items-stretch mt-9 mb-4 mx-auto">
+    <div
+      class="rounded-full overflow-hidden w-9 h-9 mr-4 border border-primary"
+    >
+      <img
+        [src]="
+          UserProfile.avatarImg
+            ? 'http://localhost/gallery-backend/public/' + UserProfile.avatarImg
+            : 'https://i.pinimg.com/originals/15/11/da/1511daf6288631f1f16c0e32a6a994c0.png'
+        "
+        alt=""
+        srcset=""
+        class="w-full h-full object-contain object-center"
+      />
+    </div>
+    <div class="flex-shrink mr-5 overflow-x-hidden">
+      <h1
+        class="font-josefin font-extrabold text-xl overflow-hidden text-ellipsis whitespace-nowrap"
+      >
+        Emil
+      </h1>
+      <a class="block border-0 p-0 text-purple-600 cursor-pointer"
+        >Change Profile Photo</a
+      >
+    </div>
+  </div>
+  <form ngForm [formGroup]="formGroup">
+    <div class="grid grid-cols-3/10-7/10">
+      <div class="text-right mr-4 mb-4">
+        <label class="font-josefin font-extrabold" for="">Username</label>
+      </div>
+      <div class="">
+        <input
+          type="text"
+          formControlName="username"
+          class="w-3/4 border border-gray-600 px-2"
+        />
+      </div>
+      <div class="text-right mr-4">
+        <label class="font-josefin font-extrabold" for="">Email</label>
+      </div>
+      <div class="">
+        <input
+          type="text"
+          formControlName="email"
+          class="w-3/4 border border-gray-600 px-2"
+        />
+      </div>
+    </div>
+    <button
+      class="block w-3/5 bg-primary py-1 my-5 mx-auto rounded-lg font-josefin font-extrabold text-lg text-center text-white"
+      (click)="onSubmit()"
+    >
+      Submit
+    </button>
+  </form>
+</div>

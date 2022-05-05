@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/model/post';
 import { PictureService } from 'src/app/service/picture.service';
 import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dialog.component';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/model/user';
 

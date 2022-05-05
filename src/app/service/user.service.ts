@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { User } from '../model/user';
 
 @Injectable({
@@ -63,7 +64,7 @@ export class UserService {
     return JSON.parse(localStorage.getItem('user'));
   }
 
-  getUser(id: string) {
+  getUser(id: string): Observable<string> {
     let headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
@@ -80,7 +81,7 @@ export class UserService {
     });
   }
 
-  getUserProfile(id: string) {
+  getUserProfile(id: string): Observable<string> {
     let headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
@@ -97,7 +98,7 @@ export class UserService {
     });
   }
 
-  getHeartedPosts(heart: string[]) {
+  getHeartedPosts(heart: string[]): Observable<string> {
     let headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
@@ -114,7 +115,7 @@ export class UserService {
     });
   }
 
-  getUserPosts(id: string) {
+  getUserPosts(id: string): Observable<string> {
     let headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
@@ -128,6 +129,97 @@ export class UserService {
     };
     return this._http.post(this._basedUrl + 'getUserPosts', body, {
       responseType: 'text',
+    });
+  }
+  getUserPostsPublicPosts(id: string): Observable<string> {
+    let headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers':
+        'Origin, X-Requested-With, Content-Type, Accept',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Credentials': 'true',
+    };
+    let body = {
+      id: id,
+    };
+    return this._http.post(this._basedUrl + 'getUserPostsPublicPosts', body, {
+      responseType: 'text',
+    });
+  }
+
+  searchUser(search: string): Observable<string> {
+    let headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers':
+        'Origin, X-Requested-With, Content-Type, Accept',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Credentials': 'true',
+    };
+    let body = {
+      search: search,
+    };
+    return this._http.post(this._basedUrl + 'searchUser', body, {
+      responseType: 'text',
+    });
+  }
+
+  updateUser(uid: string, username: string, password: string) {
+    let headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers':
+        'Origin, X-Requested-With, Content-Type, Accept',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Credentials': 'true',
+    };
+    let body = {
+      uid: uid,
+      username: username,
+      email: password,
+    };
+    return this._http.post(this._basedUrl + 'updateUser', body, {
+      responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
+    });
+  }
+
+  updatePassword(password: string, oldPassword: string, uid: string) {
+    let headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers':
+        'Origin, X-Requested-With, Content-Type, Accept',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Credentials': 'true',
+    };
+    let body = {
+      password: password,
+      oldPassword: oldPassword,
+      uid: uid,
+    };
+    return this._http.post(this._basedUrl + 'updatePassword', body, {
+      responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
+    });
+  }
+
+  updateProfilePicture(formData: FormData) {
+    let headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers':
+        'Origin, X-Requested-With, Content-Type, Accept',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Credentials': 'true',
+    };
+    return this._http.post(this._basedUrl + 'updateProfilePicture', formData, {
+      responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
     });
   }
 }

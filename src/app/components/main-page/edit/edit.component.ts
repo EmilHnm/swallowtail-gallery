@@ -6,7 +6,7 @@ import { User } from 'src/app/model/user';
 import { PictureService } from 'src/app/service/picture.service';
 import { UserService } from 'src/app/service/user.service';
 import { AlertDialogComponent } from '../../dialog/alert-dialog/alert-dialog.component';
-import { environment } from '../../../../environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { Post } from 'src/app/model/post';
 @Component({
   selector: 'app-edit',

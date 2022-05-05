@@ -46,3 +46,63 @@
     </a>
   </div>
 </nav>
+<div class="flex absolute md:hidden top-3 right-3">
+  <button
+    class="rounded-full bg-white flex p-2 drop-shadow-2xl z-[2000]"
+    (click)="toggleMenu()"
+  >
+    <mat-icon #menuIcon>{{ menuBtnIcon }}</mat-icon>
+  </button>
+</div>
+<div
+  class="md:hidden absolute justify-center items-center top-0 left-0 w-screen h-screen bg-white z-[1900]"
+  [ngClass]="{ flex: isMenuOpenning, hidden: !isMenuOpenning }"
+>
+  <div
+    class="flex flex-wrap w-full h-max justify-center items-center text-primary font-josefin font-extrabold px-3"
+  >
+    <a
+      routerLink="/"
+      class="block w-full cursor-pointer text-center mb-4"
+      (click)="toggleMenu()"
+    >
+      <span class="text-5xl cursor-pointer font-rosellinda font-normal"
+        >Swallowtail</span
+      >
+      <span class="font-josefin text-sm cursor-pointer font-bold"
+        >Share your moment</span
+      >
+    </a>
+    <a
+      (click)="toggleMenu()"
+      routerLink="/search"
+      [routerLinkActive]="['font-bold']"
+      class="block h-max w-2/5 text-center py-5 border-y border-primary mr-1"
+    >
+      <span class="text-lg">Search</span>
+    </a>
+    <a
+      (click)="toggleMenu()"
+      routerLink="/create"
+      [routerLinkActive]="['font-bold']"
+      class="block h-max w-2/5 text-center py-5 border-y border-primary ml-1"
+    >
+      <span class="text-lg">Create</span>
+    </a>
+    <a
+      (click)="toggleMenu()"
+      [routerLink]="['/profile', this.userService.getUserLogingIn().uid]"
+      [routerLinkActive]="['font-bold']"
+      class="block h-max w-2/5 text-center py-5 border-y border-primary mr-1"
+    >
+      <span class="text-lg">Your Moment</span>
+    </a>
+    <a
+      (click)="logOut()"
+      (click)="toggleMenu()"
+      class="block h-max relative w-2/5 text-center py-5 border-y border-primary ml-1"
+    >
+      <span class="text-lg">Log Out</span>
+    </a>
+  </div>
+</div>
