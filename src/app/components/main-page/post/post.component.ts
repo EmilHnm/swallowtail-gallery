@@ -60,31 +60,36 @@ export class PostComponent implements OnInit {
         this._router.navigate(['/']);
         return;
       }
-      this._pictureService.getPost(params['id']).subscribe((data) => {
-        let postTemp = JSON.parse(data.trim())[0];
+      this._pictureService.getPost(params['id']).subscribe(
+        (data) => {
+          let postTemp = JSON.parse(data.trim())[0];
 
-        this.loggingInUser = this._userService.getUserLogingIn();
-        if (
-          this.loggingInUser.uid != postTemp.uid &&
-          postTemp.visibility == '0'
-        ) {
-          this._router.navigate(['/']);
-          return;
-        }
-        this.post = postTemp;
-        this.heartedArr = JSON.parse(
-          this._userService.getUserLogingIn().hearted
-        );
+          this.loggingInUser = this._userService.getUserLogingIn();
+          if (
+            this.loggingInUser.uid != postTemp.uid &&
+            postTemp.visibility == '0'
+          ) {
+            this._router.navigate(['/']);
+            return;
+          }
+          this.post = postTemp;
+          this.heartedArr = JSON.parse(
+            this._userService.getUserLogingIn().hearted
+          );
 
-        if (this.loggingInUser.hearted.includes(this.post.id)) {
-          this.hearted = true;
-        } else {
-          this.hearted = false;
+          if (this.loggingInUser.hearted.includes(this.post.id)) {
+            this.hearted = true;
+          } else {
+            this.hearted = false;
+          }
+          this._userService.getUser(this.post.uid).subscribe((data) => {
+            this.creator = JSON.parse(data.trim())[0].username;
+          });
+        },
+        (err) => {
+          this._router.navigate(['./pagenotfound']);
         }
-        this._userService.getUser(this.post.uid).subscribe((data) => {
-          this.creator = JSON.parse(data.trim())[0].username;
-        });
-      });
+      );
     });
   }
 }

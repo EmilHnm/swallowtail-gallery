@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Post } from 'src/app/model/post';
 import { User } from 'src/app/model/user';
@@ -10,7 +10,7 @@ import { UserService } from 'src/app/service/user.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit {
   isProfileOwner: boolean = false;
   uid: string;
   UserProfile: User & { postCount; avatarImg };
@@ -19,13 +19,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   HeartedPost: Post[] = [];
   constructor(
     private _activatedRoute: ActivatedRoute,
-    public _userService: UserService
+    public _userService: UserService,
+    private _router: Router
   ) {}
   subscription: any;
   ngOnInit(): void {
     this._activatedRoute.paramMap.subscribe((params) => {
       this.uid = params.get('id');
-
       this._userService.getUserProfile(this.uid).subscribe((data) => {
         this.UserProfile = JSON.parse(data.trim());
         this._userService
@@ -40,14 +40,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.UserPosts = JSON.parse(data.trim());
         });
       } else {
-        this._userService
-          .getUserPostsPublicPosts(this.uid)
-          .subscribe((data) => {
+        this._userService.getUserPostsPublicPosts(this.uid).subscribe(
+          (data) => {
             this.UserPosts = JSON.parse(data.trim());
-          });
+          },
+          (err) => {
+            this._router.navigate(['./pagenotfound']);
+          }
+        );
       }
     });
   }
-
-  ngOnDestroy() {}
 }

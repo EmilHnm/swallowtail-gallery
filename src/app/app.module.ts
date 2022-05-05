@@ -41,6 +41,7 @@ import { AccountEditComponent } from './components/main-page/account/account-edi
 import { AccountChangePasswordComponent } from './components/main-page/account/account-change-password/account-change-password.component';
 import { AccountChangeAvatarComponent } from './components/main-page/account/account-change-avatar/account-change-avatar.component';
 import { UploadProfileComponent } from './components/dialog/upload-profile/upload-profile.component';
+import { PageNotFoundComponent } from './components/main-page/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { UploadProfileComponent } from './components/dialog/upload-profile/uploa
     AccountChangePasswordComponent,
     AccountChangeAvatarComponent,
     UploadProfileComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

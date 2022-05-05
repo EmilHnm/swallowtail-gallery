@@ -13,6 +13,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { AccountEditComponent } from './components/main-page/account/account-edit/account-edit.component';
 import { AccountChangePasswordComponent } from './components/main-page/account/account-change-password/account-change-password.component';
 import { AccountChangeAvatarComponent } from './components/main-page/account/account-change-avatar/account-change-avatar.component';
+import { PageNotFoundComponent } from './components/main-page/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,12 @@ const routes: Routes = [
           { path: 'password', component: AccountChangePasswordComponent },
           { path: 'avatar', component: AccountChangeAvatarComponent },
         ],
+      },
+      { path: 'pagenotfound', component: PageNotFoundComponent },
+      {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: 'pagenotfound',
       },
     ],
   },
