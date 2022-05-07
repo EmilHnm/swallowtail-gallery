@@ -1,3 +1,4 @@
+<app-progress-bar [value]="value"></app-progress-bar>
 <div class="block md:flex md:min-h-[80vh] relative w-4/5 mx-auto mt-10">
   <div class="relative w-full md:w-2/6 h-full px-5">
     <div class="flex items-center justify-between">
@@ -26,7 +27,7 @@
       </a>
     </div>
 
-    <p class="text-lg text-gray-700 py-4 font-holyday">
+    <p class="text-lg text-gray-700 py-4 font-holyday break-all">
       {{ post.description }}
     </p>
   </div>
@@ -36,7 +37,7 @@
   >
     <img
       class="w-full h-full object-scale-down"
-      [src]="'http://localhost/gallery-backend/public/' + this.post.imagePath"
+      [src]="this.post.imagePath"
       alt=""
     />
   </div>

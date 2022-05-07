@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/model/post';
@@ -7,6 +7,8 @@ import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dial
 import { environment } from 'src/environments/environment.prod';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/model/user';
+import { ProgressBarMode } from '@angular/material/progress-bar';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-post',
@@ -14,6 +16,7 @@ import { User } from 'src/app/model/user';
   styleUrls: ['./post.component.css'],
 })
 export class PostComponent implements OnInit {
+  value = false;
   _basedUrl = environment.serverUrl;
   post: Post = new Post();
   loggingInUser: User = new User();
@@ -48,7 +51,7 @@ export class PostComponent implements OnInit {
       height: '90vh',
       data: {
         title: this.post.title,
-        url: environment.serverUrl + this.post.imagePath,
+        url: this.post.imagePath,
         date: this.post.create_date,
       },
     });
@@ -62,29 +65,36 @@ export class PostComponent implements OnInit {
       }
       this._pictureService.getPost(params['id']).subscribe(
         (data) => {
-          let postTemp = JSON.parse(data.trim())[0];
-
-          this.loggingInUser = this._userService.getUserLogingIn();
-          if (
-            this.loggingInUser.uid != postTemp.uid &&
-            postTemp.visibility == '0'
-          ) {
-            this._router.navigate(['/']);
-            return;
+          if (data.type === HttpEventType.UploadProgress) {
+            this.value = true;
+          } else if (data.type === HttpEventType.Response) {
+            this.value = false;
           }
-          this.post = postTemp;
-          this.heartedArr = JSON.parse(
-            this._userService.getUserLogingIn().hearted
-          );
+          try {
+            let postTemp = JSON.parse(data['body'].trim())[0];
 
-          if (this.loggingInUser.hearted.includes(this.post.id)) {
-            this.hearted = true;
-          } else {
-            this.hearted = false;
-          }
-          this._userService.getUser(this.post.uid).subscribe((data) => {
-            this.creator = JSON.parse(data.trim())[0].username;
-          });
+            this.loggingInUser = this._userService.getUserLogingIn();
+            if (
+              this.loggingInUser.uid != postTemp.uid &&
+              postTemp.visibility == '0'
+            ) {
+              this._router.navigate(['/']);
+              return;
+            }
+            this.post = postTemp;
+            this.heartedArr = JSON.parse(
+              this._userService.getUserLogingIn().hearted
+            );
+
+            if (this.loggingInUser.hearted.includes(this.post.id)) {
+              this.hearted = true;
+            } else {
+              this.hearted = false;
+            }
+            this._userService.getUser(this.post.uid).subscribe((data) => {
+              this.creator = JSON.parse(data.trim())[0].username;
+            });
+          } catch (error) {}
         },
         (err) => {
           this._router.navigate(['./pagenotfound']);

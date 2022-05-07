@@ -4,7 +4,7 @@
   class="group block relative w-full h-full"
 >
   <img
-    [src]="'http://localhost/gallery-backend/public/' + this.post.imagePath"
+    [src]="this.post.imagePath"
     alt="{{ this.post.title }}"
     class="w-full h-full object-cover object-center"
   />

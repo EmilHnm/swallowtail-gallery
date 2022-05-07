@@ -13,11 +13,8 @@ import { User } from 'src/app/model/user';
   styleUrls: ['./account-change-password.component.css'],
 })
 export class AccountChangePasswordComponent implements OnInit {
-  @ViewChild('progressbar') progressBar: ElementRef;
-  mode: ProgressBarMode = 'determinate';
-  value = 0;
-  bufferValue = 75;
   user: User;
+  progress: boolean = false;
   UserProfile: User & { postCount; avatarImg };
   formGroup: FormGroup = new FormGroup({
     oldPassword: new FormControl('', [Validators.required]),
@@ -26,7 +23,15 @@ export class AccountChangePasswordComponent implements OnInit {
   });
 
   onSubmit() {
-    console.log(this.formGroup);
+    if (this.formGroup.controls['newPassword'].value.length < 6) {
+      this._matDialog.open(AlertDialogComponent, {
+        data: {
+          title: 'Invalid Password',
+          content: 'Password must be at least 6 characters',
+        },
+      });
+      return;
+    }
     if (
       this.formGroup.controls['newPassword'].status == 'INVALID' ||
       this.formGroup.controls['confirmPassword'].status == 'INVALID' ||
@@ -73,6 +78,7 @@ export class AccountChangePasswordComponent implements OnInit {
       .subscribe(
         (resp) => {
           if (resp.type === HttpEventType.Response) {
+            this.progress = false;
             this._matDialog
               .open(AlertDialogComponent, {
                 data: {
@@ -82,18 +88,15 @@ export class AccountChangePasswordComponent implements OnInit {
               })
               .beforeClosed()
               .subscribe(() => {
-                this.progressBar.nativeElement.classList.add('hidden');
-                this.value = 0;
                 this.formGroup.reset();
               });
           }
           if (resp.type === HttpEventType.UploadProgress) {
-            this.progressBar.nativeElement.classList.remove('hidden');
-            const percentDone = Math.round((100 * resp.loaded) / resp.total);
-            this.value = percentDone;
+            this.progress = true;
           }
         },
         (err) => {
+          this.progress = false;
           if (err.status == 401) {
             this._matDialog.open(AlertDialogComponent, {
               data: {
@@ -113,7 +116,7 @@ export class AccountChangePasswordComponent implements OnInit {
   ngOnInit(): void {
     this.user = this._userService.getUserLogingIn();
     this._userService.getUserProfile(this.user.uid).subscribe((data) => {
-      this.UserProfile = JSON.parse(data.trim());
+      this.UserProfile = JSON.parse(data['body'].trim());
       this._userService.getHeartedPosts(JSON.parse(this.UserProfile.hearted));
     });
   }

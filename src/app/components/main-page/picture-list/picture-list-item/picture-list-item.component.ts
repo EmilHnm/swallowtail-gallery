@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/model/post';
 
 @Component({
@@ -6,9 +6,10 @@ import { Post } from 'src/app/model/post';
   templateUrl: './picture-list-item.component.html',
   styleUrls: ['./picture-list-item.component.css'],
 })
-export class PictureListItemComponent implements OnInit {
+export class PictureListItemComponent implements OnInit, AfterContentInit {
   @Input() post: Post;
   constructor() {}
 
   ngOnInit(): void {}
+  ngAfterContentInit(): void {}
 }

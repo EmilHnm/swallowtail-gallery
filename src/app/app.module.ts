@@ -10,6 +10,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -42,6 +43,8 @@ import { AccountChangePasswordComponent } from './components/main-page/account/a
 import { AccountChangeAvatarComponent } from './components/main-page/account/account-change-avatar/account-change-avatar.component';
 import { UploadProfileComponent } from './components/dialog/upload-profile/upload-profile.component';
 import { PageNotFoundComponent } from './components/main-page/page-not-found/page-not-found.component';
+import { ProgressBarComponent } from './components/main-page/progress-bar/progress-bar.component';
+import { ProgressSpinnerComponent } from './components/main-page/progress-spinner/progress-spinner.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +74,8 @@ import { PageNotFoundComponent } from './components/main-page/page-not-found/pag
     AccountChangeAvatarComponent,
     UploadProfileComponent,
     PageNotFoundComponent,
+    ProgressBarComponent,
+    ProgressSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,6 +93,7 @@ import { PageNotFoundComponent } from './components/main-page/page-not-found/pag
     MatProgressBarModule,
     MatStepperModule,
     ImageCropperModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -36,11 +36,6 @@ const routes: Routes = [
         ],
       },
       { path: 'pagenotfound', component: PageNotFoundComponent },
-      {
-        path: '**',
-        pathMatch: 'full',
-        redirectTo: 'pagenotfound',
-      },
     ],
   },
   { path: 'login', component: LoginComponent },

@@ -6,8 +6,8 @@ import { User } from 'src/app/model/user';
 import { PictureService } from 'src/app/service/picture.service';
 import { UserService } from 'src/app/service/user.service';
 import { AlertDialogComponent } from '../../dialog/alert-dialog/alert-dialog.component';
-import { environment } from 'src/environments/environment.prod';
 import { Post } from 'src/app/model/post';
+import { HttpEventType } from '@angular/common/http';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -15,6 +15,7 @@ import { Post } from 'src/app/model/post';
 })
 export class EditComponent implements OnInit {
   url: any = null;
+  value: boolean = false;
   isPostOwner: boolean = true;
   loggingInUser: User;
   file: File;
@@ -60,20 +61,25 @@ export class EditComponent implements OnInit {
     formData.append('title', this.uploadForm.value.title);
     formData.append('description', this.uploadForm.value.description);
     formData.append('visibility', this.uploadForm.value.visibility);
-    formData.append('image', this.file);
+    formData.append('image', this.url);
     formData.append('uid', this._userService.getUserLogingIn().uid);
     this._pictureService.editPost(formData).subscribe(
       (data) => {
-        this._matDialog.open(AlertDialogComponent, {
-          data: {
-            title: 'Success',
-            content: 'Post edited successfully',
-          },
-        });
-        this._router.navigate([
-          '../post',
-          { id: this._activatedRoute.snapshot.queryParams['id'] },
-        ]);
+        if (data.type === HttpEventType.UploadProgress) {
+          this.value = true;
+        } else if (data.type === HttpEventType.Response) {
+          this.value = false;
+          this._matDialog.open(AlertDialogComponent, {
+            data: {
+              title: 'Success',
+              content: 'Post edited successfully',
+            },
+          });
+          this._router.navigate([
+            './post',
+            { id: this._activatedRoute.snapshot.queryParams['id'] },
+          ]);
+        }
       },
       (error) => {
         this._matDialog.open(AlertDialogComponent, {
@@ -96,13 +102,11 @@ export class EditComponent implements OnInit {
         this._router.navigate(['/']);
         return;
       }
-      this._pictureService.getPost(params['id']).subscribe((data) => {
+      this._pictureService.getPostEdit(params['id']).subscribe((data) => {
         let postTemp = JSON.parse(data.trim())[0];
-
         this.loggingInUser = this._userService.getUserLogingIn();
         if (postTemp.uid != this.loggingInUser.uid) {
           this.isPostOwner = false;
-          console.log('not owner');
           this._matDialog
             .open(AlertDialogComponent, {
               data: {
@@ -115,20 +119,19 @@ export class EditComponent implements OnInit {
               this._router.navigate(['../post', { id: postTemp.id }]);
               return;
             });
-        } else {
-          this.uploadForm = new FormGroup({
-            title: new FormControl(postTemp.title, Validators.required),
-            description: new FormControl(
-              postTemp.description,
-              Validators.required
-            ),
-            visibility: new FormControl(
-              postTemp.visibility == '1' ? 'public' : 'private',
-              Validators.required
-            ),
-          });
-          this.url = environment.serverUrl + postTemp.imagePath;
         }
+        this.uploadForm = new FormGroup({
+          title: new FormControl(postTemp.title, Validators.required),
+          description: new FormControl(
+            postTemp.description,
+            Validators.required
+          ),
+          visibility: new FormControl(
+            postTemp.visibility == '1' ? 'public' : 'private',
+            Validators.required
+          ),
+        });
+        this.url = postTemp.imagePath;
       });
     });
   }

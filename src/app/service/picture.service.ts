@@ -24,6 +24,8 @@ export class PictureService {
 
     return this._http.post(this._basedUrl + 'upload', formData, {
       responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
     });
   }
 
@@ -39,10 +41,31 @@ export class PictureService {
 
     return this._http.get(this._basedUrl + 'getAllPublicPost', {
       responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
     });
   }
 
   public getPost(id: string) {
+    let headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers':
+        'Origin, X-Requested-With, Content-Type, Accept',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Credentials': 'true',
+    };
+    let body = {
+      id: id,
+    };
+    return this._http.post(this._basedUrl + 'getPost', body, {
+      responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
+    });
+  }
+
+  public getPostEdit(id: string) {
     let headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
@@ -72,7 +95,6 @@ export class PictureService {
       uid: uid,
       hearted: hearted,
     };
-    console.log(body);
     return this._http.post(this._basedUrl + 'setHeartPost', body, {
       responseType: 'text',
     });
@@ -87,9 +109,10 @@ export class PictureService {
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Credentials': 'true',
     };
-
     return this._http.post(this._basedUrl + 'editPost', formData, {
       responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
     });
   }
   searchPost(search: string) {
@@ -106,6 +129,8 @@ export class PictureService {
     };
     return this._http.post(this._basedUrl + 'searchPost', body, {
       responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
     });
   }
 }

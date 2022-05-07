@@ -1,3 +1,4 @@
+<app-progress-bar [value]="progress"></app-progress-bar>
 <div class="w-full h-full flex items-center justify-center">
   <button
     class="w-64 h-64 rounded-full overflow-hidden border border-primary"
@@ -7,7 +8,7 @@
     <img
       [src]="
         UserProfile.avatarImg
-          ? 'http://localhost/gallery-backend/public/' + UserProfile.avatarImg
+          ? UserProfile.avatarImg
           : 'https://i.pinimg.com/originals/15/11/da/1511daf6288631f1f16c0e32a6a994c0.png'
       "
       alt="avatar"

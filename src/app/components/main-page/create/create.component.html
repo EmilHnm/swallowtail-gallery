@@ -1,3 +1,4 @@
+<app-progress-bar [value]="progress"></app-progress-bar>
 <div class="w-4/5 mx-auto mt-5 px-5 py-9 bg-white">
   <div class="font-josefin text-4xl font-bold">Share your moment</div>
   <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" class="w-full">
@@ -70,7 +71,7 @@
           (change)="onFileChange($event)"
           accept="image/png, image/gif, image/jpeg"
         />
-        <div class="relative w-full h-full">
+        <div class="absolute w-full h-full">
           <span
             *ngIf="!url"
             class="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-2/3 md:-translate-y-1/2 block text-center font-josefin font-bold text-xl text-primary"
@@ -91,6 +92,7 @@
       <button
         class="w-full rounded-2xl py-2 bg-purple-500 text-white text-xl text-center font-josefin font-bold"
         type="submit"
+        [disabled]="disabled"
       >
         Upload
       </button>
