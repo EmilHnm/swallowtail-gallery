@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 1. Move the php folder to your server application
 2. Import the swallowtail_db.sql file to your phpMyAdmin database
-3. Change the connection path in the file \_connection.php and \_function.php
+3. Config the connection path in the file \_connection.php and \_function.php
 
 ## Development server
 
