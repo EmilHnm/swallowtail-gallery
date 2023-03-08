@@ -13,11 +13,7 @@ import { ProgressBarMode } from '@angular/material/progress-bar';
   styleUrls: ['./account-edit.component.css'],
 })
 export class AccountEditComponent implements OnInit {
-  @ViewChild('progressbar') progressBar: ElementRef;
-  mode: ProgressBarMode = 'determinate';
-  value = 0;
-  bufferValue = 75;
-
+  progress: boolean = false;
   user: User;
   formGroup: FormGroup;
   UserProfile: User & { postCount; avatarImg };
@@ -47,26 +43,20 @@ export class AccountEditComponent implements OnInit {
       .subscribe(
         (resp) => {
           if (resp.type === HttpEventType.Response) {
-            this._matDialog
-              .open(AlertDialogComponent, {
-                data: {
-                  title: 'Success',
-                  content: 'Update success',
-                },
-              })
-              .beforeClosed()
-              .subscribe(() => {
-                this.progressBar.nativeElement.classList.add('hidden');
-                this.value = 0;
-              });
+            this.progress = false;
+            this._matDialog.open(AlertDialogComponent, {
+              data: {
+                title: 'Success',
+                content: 'Update success',
+              },
+            });
           }
           if (resp.type === HttpEventType.UploadProgress) {
-            this.progressBar.nativeElement.classList.remove('hidden');
-            const percentDone = Math.round((100 * resp.loaded) / resp.total);
-            this.value = percentDone;
+            this.progress = true;
           }
         },
         (err) => {
+          this.progress = false;
           if (err.status == 401) {
             this._matDialog.open(AlertDialogComponent, {
               data: { title: 'Invalid Email', content: 'This email was used' },
@@ -78,7 +68,7 @@ export class AccountEditComponent implements OnInit {
   ngOnInit(): void {
     this.user = this._userService.getUserLogingIn();
     this._userService.getUserProfile(this.user.uid).subscribe((data) => {
-      this.UserProfile = JSON.parse(data.trim());
+      this.UserProfile = JSON.parse(data['body'].trim());
       this._userService.getHeartedPosts(JSON.parse(this.UserProfile.hearted));
     });
     this.formGroup = new FormGroup({

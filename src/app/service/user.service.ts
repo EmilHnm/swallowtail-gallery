@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -46,7 +46,7 @@ export class UserService {
       password: password,
     };
     console.log(body);
-    return this._http.post(this._basedUrl + 'signup', body, {
+    return this._http.post(this._basedUrl + 'signup.php', body, {
       responseType: 'text',
     });
   }
@@ -81,7 +81,7 @@ export class UserService {
     });
   }
 
-  getUserProfile(id: string): Observable<string> {
+  getUserProfile(id: string) {
     let headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
@@ -95,10 +95,12 @@ export class UserService {
     };
     return this._http.post(this._basedUrl + 'getUserProfile', body, {
       responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
     });
   }
 
-  getHeartedPosts(heart: string[]): Observable<string> {
+  getHeartedPosts(heart: string[]) {
     let headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
@@ -112,10 +114,12 @@ export class UserService {
     };
     return this._http.post(this._basedUrl + 'getHeartedPosts', body, {
       responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
     });
   }
 
-  getUserPosts(id: string): Observable<string> {
+  getUserPosts(id: string) {
     let headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
@@ -129,9 +133,11 @@ export class UserService {
     };
     return this._http.post(this._basedUrl + 'getUserPosts', body, {
       responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
     });
   }
-  getUserPostsPublicPosts(id: string): Observable<string> {
+  getUserPostsPublicPosts(id: string): Observable<HttpEvent<string>> {
     let headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
@@ -145,10 +151,12 @@ export class UserService {
     };
     return this._http.post(this._basedUrl + 'getUserPostsPublicPosts', body, {
       responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
     });
   }
 
-  searchUser(search: string): Observable<string> {
+  searchUser(search: string) {
     let headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
@@ -162,6 +170,8 @@ export class UserService {
     };
     return this._http.post(this._basedUrl + 'searchUser', body, {
       responseType: 'text',
+      reportProgress: true,
+      observe: 'events',
     });
   }
 

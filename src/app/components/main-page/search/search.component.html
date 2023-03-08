@@ -19,12 +19,16 @@
   </div>
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Post">
+      <app-progress-spinner [value]="PostSearching"></app-progress-spinner>
       <app-picture-list
         *ngIf="PostSearchResult.length != 0; else noPosts"
         [postList]="PostSearchResult"
       ></app-picture-list>
       <ng-template #noPosts>
-        <div class="flex items-center justify-center h-full">
+        <div
+          class="flex items-center justify-center h-full"
+          *ngIf="!PostSearching"
+        >
           <h2 class="font-josefin text-2xl font-extrabold">
             No posts match your search
           </h2>
@@ -32,12 +36,16 @@
       </ng-template>
     </mat-tab>
     <mat-tab label="User">
+      <app-progress-spinner [value]="UserSearching"></app-progress-spinner>
       <app-user-list
         *ngIf="UserSearchResult.length != 0; else noUsers"
         [users]="UserSearchResult"
       ></app-user-list>
       <ng-template #noUsers>
-        <div class="flex items-center justify-center h-full">
+        <div
+          class="flex items-center justify-center h-full"
+          *ngIf="!UserSearching"
+        >
           <h2 class="font-josefin text-2xl font-extrabold">
             No user match your search
           </h2>

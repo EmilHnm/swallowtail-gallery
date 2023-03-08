@@ -71,7 +71,8 @@ export class SigninComponent implements OnInit {
           this._router.navigate(['/']);
         },
         (err) => {
-          if (err.status == 400) {
+          console.log(err);
+          if (err.status == 401) {
             this.alert.nativeElement.innerHTML = 'Email already exists';
           }
         }

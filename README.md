@@ -1,6 +1,12 @@
 # Gallery
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0 for client-side and [PHP](https://www.php.net/), [MySQL](https://www.mysql.com/) for server-side.
+
+## Setting up
+
+1. Move the php folder to your server application
+2. Import the swallowtail_db.sql file to your phpMyAdmin database
+3. Config the connection path in the file \_connection.php and \_function.php
 
 ## Development server
 

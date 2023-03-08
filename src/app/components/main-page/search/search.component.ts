@@ -5,6 +5,7 @@ import { PictureService } from 'src/app/service/picture.service';
 import { AlertDialogComponent } from '../../dialog/alert-dialog/alert-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/service/user.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-search',
@@ -14,6 +15,8 @@ import { UserService } from 'src/app/service/user.service';
 export class SearchComponent implements OnInit {
   PostSearchResult: Post[] = [];
   UserSearchResult: User & { avatarImg }[] = [];
+  UserSearching: boolean = false;
+  PostSearching: boolean = false;
   value: string = '';
   constructor(
     private _pictureService: PictureService,
@@ -30,16 +33,40 @@ export class SearchComponent implements OnInit {
       });
       return;
     }
+    this.PostSearchResult.length = 0;
+    this.UserSearchResult.length = 0;
     this._pictureService.searchPost(this.value).subscribe(
       (data) => {
-        this.PostSearchResult = JSON.parse(data.trim());
+        try {
+          this.PostSearchResult = JSON.parse(data['body'].trim());
+        } catch (error) {}
+        if (data.type === HttpEventType.UploadProgress) {
+          this.PostSearching = true;
+        }
+        if (data.type === HttpEventType.Response) {
+          this.PostSearching = false;
+        }
       },
-      (error) => {}
+      (error) => {
+        this.PostSearching = false;
+      }
     );
-    this._userService.searchUser(this.value).subscribe((data) => {
-      this.UserSearchResult = JSON.parse(data.trim());
-      console.log(this.UserSearchResult);
-    });
+    this._userService.searchUser(this.value).subscribe(
+      (data) => {
+        try {
+          this.UserSearchResult = JSON.parse(data['body'].trim());
+        } catch (error) {}
+        if (data.type === HttpEventType.UploadProgress) {
+          this.UserSearching = true;
+        }
+        if (data.type === HttpEventType.Response) {
+          this.UserSearching = false;
+        }
+      },
+      (error) => {
+        this.UserSearching = false;
+      }
+    );
   }
 
   ngOnInit(): void {}

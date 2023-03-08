@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverUrl: 'http://localhost/gallery-backend/public/',
+  serverUrl: 'http://localhost/swallowtail-sv/public/',
 };

@@ -1,3 +1,4 @@
+<app-progress-bar [value]="progress"></app-progress-bar>
 <div class="w-full">
   <div class="block md:flex w-4/5 mx-auto py-3 border-b border-purple-300">
     <button
@@ -6,7 +7,7 @@
       <img
         [src]="
           UserProfile.avatarImg
-            ? 'http://localhost/gallery-backend/public/' + UserProfile.avatarImg
+            ? UserProfile.avatarImg
             : 'https://i.pinimg.com/originals/15/11/da/1511daf6288631f1f16c0e32a6a994c0.png'
         "
         alt=""
@@ -74,12 +75,16 @@
   </div>
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Posts">
+      <app-progress-spinner [value]="gettingPosts"></app-progress-spinner>
       <app-picture-list
         *ngIf="UserPosts.length != 0; else noPosts"
         [postList]="UserPosts"
       ></app-picture-list>
       <ng-template #noPosts>
-        <div class="flex items-center justify-center h-full">
+        <div
+          class="flex items-center justify-center h-full"
+          *ngIf="!gettingPosts"
+        >
           <h2 class="font-josefin text-2xl font-extrabold">
             No posts yet. <br />
             <a class="text-primary" [routerLink]="['/create']">Create</a> more
@@ -89,12 +94,16 @@
       </ng-template>
     </mat-tab>
     <mat-tab label="Hearted">
+      <app-progress-spinner [value]="gettingHearted"></app-progress-spinner>
       <app-picture-list
-        *ngIf="UserPosts.length != 0; else noHearted"
+        *ngIf="HeartedPost.length != 0; else noHearted"
         [postList]="HeartedPost"
       ></app-picture-list>
       <ng-template #noHearted>
-        <div class="flex items-center justify-center h-full">
+        <div
+          class="flex items-center justify-center h-full"
+          *ngIf="!gettingHearted"
+        >
           <h2 class="font-josefin text-2xl font-extrabold">
             No hearted posts yet. <br />
             <mat-icon class="text-primary">favorite_border</mat-icon>
