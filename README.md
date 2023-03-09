@@ -12,22 +12,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## INtroduce
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Welcome to our social website for sharing pictures! Our platform offers a seamless and convenient way for you to connect with others by sharing and viewing pictures. We offer a variety of features, including Sign up, log in, creating/editing/deleting posts, and searching for posts.
 
-## Build
+Our Sign up process is quick and easy, allowing you to create an account in just a few steps. Once you are registered, you can log in to access your account, upload and share your pictures with friends, family, and followers.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+You can create, edit, and delete posts on our platform, allowing you to easily share and manage your pictures. You can add captions, tags, and location information to your posts to make them more meaningful and easier to find.
 
-## Running unit tests
+Our search functionality is powerful and user-friendly, making it easy to find the exact post you are looking for. You can search by keywords, tags, or usernames to find posts that interest you.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Our social website is a great way to connect with others, share your pictures, and discover new content. We are committed to providing you with a fun and engaging experience, and our easy-to-use interface, reliable search functionality, and top-notch customer service make us the go-to destination for sharing and discovering pictures online.
