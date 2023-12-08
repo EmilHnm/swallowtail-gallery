@@ -1,0 +1,16 @@
+<div
+  class="relative my-1 w-full h-80 border border-solid border-gray-500 focus:outline-purple-500 rounded-3xl"
+  style="font-family: Holiday"
+>
+  <div
+    class="w-full h-full px-3 py-4 overflow-scroll text-base outline-none leading-7 text-gray-600 scrollbar"
+    contenteditable="true"
+    [innerText]="descriptionValue"
+    (input)="onDescriptionChange($event)"
+  ></div>
+  <span
+    *ngIf="descriptionValue === ''"
+    class="absolute top-4 left-3 select-none z-10 text-gray-400"
+    >{{ placeholder }}
+  </span>
+</div>

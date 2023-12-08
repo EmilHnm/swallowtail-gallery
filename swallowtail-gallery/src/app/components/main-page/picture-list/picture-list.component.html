@@ -1,0 +1,8 @@
+<mat-grid-list [cols]="gridByBreakpoint[size]" #grid rowHeight="1:1">
+  <mat-grid-tile *ngFor="let post of postList">
+    <app-picture-list-item
+      [post]="post"
+      class="w-full h-full"
+    ></app-picture-list-item>
+  </mat-grid-tile>
+</mat-grid-list>

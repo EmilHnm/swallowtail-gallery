@@ -1,0 +1,13 @@
+<app-picture-list [postList]="posts"></app-picture-list>
+<div
+  class="w-full h-full flex items-center justify-center min-h-screen"
+  *ngIf="!progress"
+>
+  <app-progress-spinner [value]="!progress"></app-progress-spinner>
+</div>
+<div
+  class="w-full h-full flex items-center justify-center min-h-screen select-none"
+  *ngIf="progress && !posts.length"
+>
+  <h2 class="text-primary font-semibold text-xl">Nothing Here</h2>
+</div>

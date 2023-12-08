@@ -1,0 +1,16 @@
+:host ::ng-deep .mat-ink-bar {
+  border-bottom: 2px;
+  border-style: solid;
+  border-color: #925da3;
+}
+
+:host ::ng-deep .mat-mdc-tab-header {
+  border-bottom: 0px;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
+:host ::ng-deep .mat-tab-label-content {
+  font-family: "Josefin Sans";
+  font-weight: 900;
+  font-size: 18px;
+}

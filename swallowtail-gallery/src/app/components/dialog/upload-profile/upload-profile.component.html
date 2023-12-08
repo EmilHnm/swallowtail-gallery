@@ -1,0 +1,105 @@
+<h1 mat-dialog-title class="text-primary font-josefin font-extrabold">
+  Change Profile Picture
+</h1>
+<div mat-dialog-content class="min-w-[70vw] min-h-[80vh]">
+  <mat-stepper linear #stepper class="h-full w-full">
+    <mat-step [stepControl]="uploadFileForm" class="h-full w-full">
+      <form [formGroup]="uploadFileForm" class="h-full w-full">
+        <ng-template matStepLabel>Upload Profile Picture</ng-template>
+        <div
+          class="relative min-h-[60vh] w-full ml-3 overflow-hidden border rounded-2xl"
+        >
+          <input
+            type="file"
+            formControlName="image"
+            id=""
+            class="absolute opacity-0 w-full h-full top-0 left-0 z-30"
+            (change)="onFileChange($event)"
+            accept="image/png, image/gif, image/jpeg"
+          />
+          <div class="absolute top-0 left-0 w-full h-full">
+            <span
+              *ngIf="!url"
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-2/3 block text-center font-josefin font-bold text-xl text-primary"
+            >
+              Drag your photos here<br />
+              or<br />
+              click here to upload
+            </span>
+            <img
+              *ngIf="url"
+              [src]="url"
+              class="absolute top-0 left-0 block h-full w-full object-scale-down"
+            />
+          </div>
+        </div>
+        <div class="mt-2">
+          <button
+            matStepperNext
+            class="block px-4 py-2 bg-primary rounded text-white"
+          >
+            Next
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="editFileForm">
+      <ng-template matStepLabel>Edit Profile Picture</ng-template>
+      <div class="text-center h-[60vh]">
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="4 / 4"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded(imageChangedEvent)"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+      </div>
+
+      <div class="w-full mt-2 flex justify-between">
+        <button
+          matStepperPrevious
+          class="block px-4 py-2 bg-primary rounded text-white"
+        >
+          Previous
+        </button>
+        <button
+          matStepperNext
+          class="block px-4 py-2 bg-primary rounded text-white"
+        >
+          Next
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="saveFileForm">
+      <ng-template matStepLabel>Save Profile Picture</ng-template>
+
+      <div class="relative min-h-[60vh] max-w-full overflow-hidden">
+        <img
+          #outputImage
+          class="absolute top-0 left-0 block h-full w-full object-contain"
+          crossorigin
+          [src]="croppedImage"
+        />
+      </div>
+      <div class="w-full mt-2 flex justify-between">
+        <button
+          matStepperPrevious
+          class="block px-4 py-2 bg-primary rounded text-white"
+        >
+          Previous
+        </button>
+        <button
+          class="block px-4 py-2 bg-primary rounded text-white"
+          (click)="onSubmit()"
+        >
+          Finish
+        </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

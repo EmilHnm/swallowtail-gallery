@@ -1,0 +1,26 @@
+<div class="w-full h-[calc(100vh-140px)] relative">
+  <h1
+    mat-dialog-title
+    class="inline-block font-holyday text-primary text-shadow"
+  >
+    {{ title }}
+  </h1>
+  <div class="relative w-full h-[calc(100%-100px)]">
+    <h2
+      class="absolute bottom-7 right-0 font-holyday text-gray-300 text-shadow transform -rotate-[30deg]"
+    >
+      {{ date }}
+    </h2>
+    <img src="{{ url }}" alt="" class="w-full h-full object-scale-down" />
+  </div>
+
+  <div mat-dialog-actions class="flex justify-start">
+    <button
+      mat-button
+      mat-dialog-close
+      class="rounded-xl bg-gray-200 px-4 py-2 outline-none"
+    >
+      Close
+    </button>
+  </div>
+</div>

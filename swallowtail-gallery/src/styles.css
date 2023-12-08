@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Rosellinda Alyamore";
+    src: url("./app/font/SVN-Rosellinda Alyamore.otf");
+  }
+  @font-face {
+    font-family: "Harmony";
+    src: url("./app/font/SVN-Harmony.otf");
+  }
+  @font-face {
+    font-family: "Pleasent";
+    src: url("./app/font/SVN-Pleasent.otf");
+  }
+  @font-face {
+    font-family: "Holiday";
+    src: url("./app/font/SVN-Holiday.otf");
+  }
+}
+
+body {
+  background-color: #e9e8e8;
+}
+
+input:checked + div {
+  @apply border-purple-500;
+}
+
+input:checked + div svg {
+  @apply block;
+}

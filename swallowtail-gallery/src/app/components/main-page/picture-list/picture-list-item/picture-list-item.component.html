@@ -1,0 +1,25 @@
+<a
+  [routerLink]="['/post']"
+  [queryParams]="{ id: post.id }"
+  class="group block relative w-full h-full"
+>
+  <img
+    [src]="serverUrl + '/storage/images/' + this.post.imagePath"
+    alt="{{ this.post.title }}"
+    class="w-full h-full object-cover object-center"
+  />
+  <div
+    class="hidden group-hover:block absolute top-0 left-0 w-full h-full bg-[#3b3b3bb3] items-center z-40"
+  >
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-max w-max"
+    >
+      <div class="font-josefin text-xl mb-2 px-6 text-center text-white">
+        {{ this.post.title }}
+      </div>
+      <div class="font-josefin text-xl mb-3 px-6 text-center text-white">
+        — view —
+      </div>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "http://swallowtail-gallery.local/api",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/api": "" }
+  }
+}

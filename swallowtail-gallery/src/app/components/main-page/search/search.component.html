@@ -1,0 +1,56 @@
+<div class="w-4/5 mx-auto">
+  <h2 class="font-josefin font-extrabold text-2xl text-center text-primary">
+    Search
+  </h2>
+  <div class="flex">
+    <input
+      type="text"
+      class="font-josefin font-bold w-full px-2 outline-none"
+      placeholder="Enter what you want to search"
+      [(ngModel)]="value"
+      (keyup.enter)="search()"
+    />
+    <button
+      class="bg-primary hover:bg-purple-700 text-white font-josefin font-bold ml-2 py-2 px-4"
+      (click)="search()"
+    >
+      Search
+    </button>
+  </div>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Post">
+      <app-progress-spinner [value]="PostSearching"></app-progress-spinner>
+      <app-picture-list
+        *ngIf="PostSearchResult.length != 0; else noPosts"
+        [postList]="PostSearchResult"
+      ></app-picture-list>
+      <ng-template #noPosts>
+        <div
+          class="flex items-center justify-center h-full"
+          *ngIf="!PostSearching"
+        >
+          <h2 class="font-josefin text-2xl font-extrabold">
+            No posts match your search
+          </h2>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="User">
+      <app-progress-spinner [value]="UserSearching"></app-progress-spinner>
+      <app-user-list
+        *ngIf="UserSearchResult.length != 0; else noUsers"
+        [users]="UserSearchResult"
+      ></app-user-list>
+      <ng-template #noUsers>
+        <div
+          class="flex items-center justify-center h-full"
+          *ngIf="!UserSearching"
+        >
+          <h2 class="font-josefin text-2xl font-extrabold">
+            No user match your search
+          </h2>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
